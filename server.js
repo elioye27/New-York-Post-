@@ -7,7 +7,7 @@ var Article = require("./models/Article.js");
 var Save = require("./models/Save.js");
 var logger = require("morgan");
 var cheerio = require("cheerio");
-var path = require("path");
+// var path = require("path");
 var app = express();
 var PORT = process.env.PORT || 4000;
 
@@ -46,24 +46,24 @@ db.on('error',function(err){
 db.once('open', function(){
     console.log("Mongoose connection is successful");
 });
-var exphbs = require("express-handlebars");
+// var exphbs = require("express-handlebars");
 
-app.engine("handlebars", exphbs({
-    defaultLayout: "main"
-}));
+// app.engine("handlebars", exphbs({
+//     defaultLayout: "main"
+// }));
 
-app.set("view engine", "handlebars");
+// app.set("view engine", "handlebars");
 
-app.get("/", function (req, res) {
-    res.sendFile(path.join(__dirname, "views/index.html"));
-});
+// app.get("/", function (req, res) {
+//     res.sendFile(path.join(__dirname, "index.html"));
+// });
 
 require("./routes/scrape.js")(app);
 require("./routes/html.js")(app);
 
-app.get("*", function (req, res) {
-    res.sendFile(path.join(__dirname, "views/index.html"));
-});
+// app.get("*", function (req, res) {
+//     res.sendFile(path.join(__dirname, "index.html"));
+// });
 
 
 app.listen(PORT, function () {
