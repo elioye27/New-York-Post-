@@ -19,6 +19,10 @@ app.use(bodyParser.urlencoded({
 
 app.use(express.static("public"));
 
+
+require("./routes/scrape.js")(app);
+
+
 //--------Database config with mongoose-----------
 
 var databaseUrl = 'mongodb://localhost/ElijahScraper';
@@ -41,10 +45,6 @@ db.on('error',function(err){
 db.once('open', function(){
     console.log("Mongoose connection is successful");
 });
-
-
-require("./routes/scrape.js")(app);
-
 
 app.listen(PORT, function () {
     console.log("App listening on PORT " + PORT);
