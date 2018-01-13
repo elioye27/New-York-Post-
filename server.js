@@ -14,17 +14,22 @@ var PORT = process.env.PORT || 4000;
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-    extended: true
+    extended: false
 }));
+
 app.use(express.static("./public"));
 
-// connect to database
-mongoose.Promise = Promise;
-var dbConnect = process.env.MONGODB_URI || "mongodb://localhost/foxsScrape";
+//--------Database config with mongoose-----------
+
+var databaseURL = 'mongodb://localhost/lekanScraper';
+
+// ------------------------------------------------------
+ 
+
 if(process.env.MONGODB_URI) {
     mongoose.connect(process.env.MONGODB_URI)
 } else {
-    mongoose.connect(dbConnect);
+    mongoose.connect(databaseURL);
 }
 
 var db = mongoose.connection;
