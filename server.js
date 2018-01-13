@@ -8,26 +8,20 @@ var mongoose = require("mongoose");
 var logger = require("morgan");
 var cheerio = require("cheerio");
 var app = express();
+var path = require("path");
 var PORT = process.env.PORT || 4000;
 
 
 app.use(logger('dev'));
-// app.use(bodyParser.json());
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-app.use(express.static("public"));
-
-app.get("/", function(req, res) {
-   res.sendFile(path.join(__dirname, "../public/index.html"));
- });
+app.use(express.static("./public"));
 
 
-require("./routes/scrape.js")(app);
-
-
-//--------Database config with mongoose-----------
+//--------Database connection with mongoose-----------
 
 var databaseUrl = 'mongodb://localhost/ElijahScraper';
 
@@ -49,6 +43,28 @@ db.on('error',function(err){
 db.once('open', function(){
     console.log("Mongoose connection is successful");
 });
+
+// ---------------------End of Connection--------------------------
+
+var exphbs = require("express-handlebars");
+
+app.engine("handlebars", exphbs({
+    defaultLayout: "main"
+}));
+
+app.set("view engine", "handlebars");
+
+app.get("/", function (req, res) {
+    res.sendFile(path.join(__dirname, "views/index.html"));
+});
+
+require("./routes/scrape")(app);
+require("./routes/html.js")(app);
+
+app.get("*", function (req, res) {
+    res.sendFile(path.join(__dirname, "views/index.html"));
+});
+
 
 app.listen(PORT, function () {
     console.log("App listening on PORT " + PORT);
