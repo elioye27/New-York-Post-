@@ -14,7 +14,7 @@ var PORT = process.env.PORT || 4000;
 app.use(logger('dev'));
 // app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-    extended: false
+    extended: true
 }));
 
 app.use(express.static("public"));
