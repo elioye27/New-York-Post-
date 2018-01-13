@@ -19,6 +19,10 @@ app.use(bodyParser.urlencoded({
 
 app.use(express.static("public"));
 
+app.get("/", function(req, res) {
+   res.sendFile(path.join(__dirname, "../public/index.html"));
+ });
+
 
 require("./routes/scrape.js")(app);
 
