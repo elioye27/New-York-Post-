@@ -2,6 +2,7 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var request = require("request");
 var mongoose = require("mongoose");
+var mongojs = require("mongojs");
 var Note = require("./models/Note");
 var Article = require("./models/Article");
 var Save = require("./models/Save");
