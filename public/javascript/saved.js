@@ -25,15 +25,15 @@ function displaySaved() {
             var a = $("<a>");
             a.attr("href", data[i].link);
             a.attr("id", "link-" + data[i]._id);
-            a.text("Click here to see the article");
+            a.text("Go to the article");
             cardActionDiv.append(a);
             var button = $("<a>");
-            button.addClass("waves-effect waves-light blue btn create-note modal-trigger");
+            button.addClass("waves-effect waves-light white btn create-note modal-trigger");
             button.attr("data-id", data[i]._id);
             button.attr("data-target", "notes");
             button.text("Create Notes");
             var deleteArticle = $("<a>");
-            deleteArticle.addClass("waves-effect waves-light red btn delete-button");
+            deleteArticle.addClass("waves-effect waves-light white btn delete-button");
             deleteArticle.attr("id", data[i]._id);
             deleteArticle.text("Delete");
             var byline = $("<p>");
