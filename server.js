@@ -4,6 +4,8 @@ var request = require("request");
 var mongoose = require("mongoose");
 var logger = require("morgan");
 var cheerio = require("cheerio");
+
+
 var path = require("path");
 var app = express();
 var PORT = process.env.PORT || 4000;
@@ -59,6 +61,8 @@ app.get("/", function (req, res) {
 require("./routes/scrape")(app);
 require("./routes/html.js")(app);
 
+
+
 app.get("*", function (req, res) {
     res.sendFile(path.join(__dirname, "views/index.html"));
 });
@@ -67,3 +71,6 @@ app.get("*", function (req, res) {
 app.listen(PORT, function () {
     console.log("App listening on PORT " + PORT);
 });
+
+// our module get's exported as app.
+module.exports = app;

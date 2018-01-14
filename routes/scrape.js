@@ -2,8 +2,8 @@
 var cheerio = require("cheerio");
 var request = require("request");
 // require the models
-var Note = require("../models/Note.js");
-var Article = require("../models/Article.js");
+var Note = require("../models/Note");
+var Article = require("../models/Article");
 var Save = require("../models/Save");
 
 module.exports = function (app) {
