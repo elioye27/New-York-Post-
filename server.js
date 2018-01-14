@@ -14,10 +14,10 @@ var PORT = process.env.PORT || 4000;
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-    extended: true
+    extended: false
 }));
 
-app.use(express.static("./public"));
+app.use(express.static("public"));
 
 
 //--------Database connection with mongoose-----------
@@ -72,5 +72,3 @@ app.listen(PORT, function () {
     console.log("App listening on PORT " + PORT);
 });
 
-// our module get's exported as app.
-module.exports = app;
