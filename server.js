@@ -2,26 +2,25 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var request = require("request");
 var mongoose = require("mongoose");
+var mongojs = require("mongojs");
 var logger = require("morgan");
 var cheerio = require("cheerio");
-
-
-var path = require("path");
 var app = express();
+var path = require("path");
 var PORT = process.env.PORT || 4000;
 
-// Parse application/x-www-form-urlencoded
+
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-    extended: false
+    extended: true
 }));
 
-app.use(express.static("public"));
+app.use(express.static("./public"));
 
 
 //--------Database connection with mongoose-----------
-mongoose.Promise = Promise;
+
 
 var databaseUrl = 'mongodb://localhost/ElijahScraper';
 
@@ -58,10 +57,8 @@ app.get("/", function (req, res) {
     res.sendFile(path.join(__dirname, "views/index.html"));
 });
 
-require("./routes/scrape")(app);
+require("./routes/scrape.js")(app);
 require("./routes/html.js")(app);
-
-
 
 app.get("*", function (req, res) {
     res.sendFile(path.join(__dirname, "views/index.html"));
@@ -71,4 +68,3 @@ app.get("*", function (req, res) {
 app.listen(PORT, function () {
     console.log("App listening on PORT " + PORT);
 });
-
