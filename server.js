@@ -2,9 +2,9 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var request = require("request");
 var mongoose = require("mongoose");
-// var Note = require("./models/Note.js");
-// var Article = require("./models/Article.js");
-// var Save = require("./models/Save.js");
+var Note = require("./models/Note");
+var Article = require("./models/Article");
+var Save = require("./models/Save");
 var logger = require("morgan");
 var cheerio = require("cheerio");
 var app = express();
@@ -22,6 +22,7 @@ app.use(express.static("./public"));
 
 
 //--------Database connection with mongoose-----------
+mongoose.Promise = Promise;
 
 var databaseUrl = 'mongodb://localhost/ElijahScraper';
 
